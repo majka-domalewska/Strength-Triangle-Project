@@ -2,9 +2,11 @@ const express = require("express");
 const { json } = require("express");
 const { connectDB } = require("./db");
 const { signupUser, loginUser } = require("./userController");
+const cors = require("cors");
 
 // Initialize the app
 const app = express();
+app.use(cors());
 app.use(json());
 
 // Middleware to log requests
