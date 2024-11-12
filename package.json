@@ -11,6 +11,7 @@
     "test": "jest --watchAll",
     "lint": "expo lint"
   },
+  "type": "module",
   "jest": {
     "preset": "jest-expo"
   },
@@ -20,6 +21,7 @@
     "axios": "^1.7.7",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "expo": "~51.0.28",
     "expo-constants": "~16.0.2",
     "expo-font": "~12.0.9",
@@ -31,6 +33,7 @@
     "expo-web-browser": "~13.0.3",
     "express": "^4.21.1",
     "mongodb": "^6.10.0",
+    "mongoose": "^8.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.74.5",

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text, Alert } from 'react-native';
-import { loginUser, signupUser } from '@/backend/api';
+import { loginUser, signupUser } from '../backend/controllers/userController.js';
 
 const LoginSignupScreen = () => {
     const [isLogin, setIsLogin] = useState(true); // Track whether it's login or signup
