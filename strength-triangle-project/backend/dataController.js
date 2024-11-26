@@ -6,8 +6,8 @@ async function getAnswers() {
     }
 
     const db = client.db("strength_triangle");
-    const answersEn = db.collection("answers_en");
-    const answersNl = db.collection("answers_nl");
+    const answersEn = db.collection("answers_en").find().toArray();
+    const answersNl = db.collection("answers_nl").find().toArray();
 
     // console.log(answersEn, answersNl);
     return { answersEn, answersNl };
@@ -19,11 +19,13 @@ async function getOutcomes() {
     }
 
     const db = client.db("strength_triangle");
-    const outcomesEn = db.collection("outcomes_en");
-    const outcomesNl = db.collection("outcomes_nl");
+    const outcomesEn = db.collection("outcomes_en").find().toArray();
+    const outcomesNl = db.collection("outcomes_nl").find().toArray();
 
     // console.log(answersEn, answersNl);
-    return { outcomesEn, outcomesEn };
+    return { outcomesEn, outcomesNl };
 }
+
+getOutcomes();
 
 module.exports = {getAnswers, getOutcomes};

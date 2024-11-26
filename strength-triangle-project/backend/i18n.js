@@ -1,28 +1,39 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { getAnswers, getOutcomes } from './dataController';
 
-i18n
-    .use(initReactI18next) // Pass i18n instance to react-i18next.
+
+async function setupI18n() {
+    const { answersEn, answersNl } = await getAnswers();
+    const { outcomesEn, outcomesNl } = await getOutcomes();
+
+    i18n
+    .use(LanguageDetector)
+    .use(initReactI18next)
     .init({
         debug: true,
-        fallbackLng: 'en', // Default language.
+        fallbackLng: 'en', // Default language
         interpolation: {
-            escapeValue: false, // React handles escaping.
+            escapeValue: false,
         },
         resources: {
             en: {
                 translation: {
-                    welcome_message: "Welcome to our app!",
-                    description: "This is a React Native app with language support.",
-                },
+                    answers_en: answersEn,
+                    outcomes_en: outcomesEn,
+                }
             },
             nl: {
                 translation: {
-                    welcome_message: "Welkom bij onze app!",
-                    description: "Dit is een React Native-app met taalondersteuning.",
+                    answers_nl: answersNl,
+                    outcomes_nl: outcomesNl,
                 },
             },
         },
     });
+}
+
+setupI18n();
 
 export default i18n;
