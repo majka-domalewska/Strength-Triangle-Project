@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Explicitly use LF for JavaScript and TypeScript files
+*.js text eol=lf
+*.ts text eol=lf
+
+# Explicitly use CRLF for batch files
+*.bat text eol=crlf
