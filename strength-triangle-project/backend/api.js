@@ -12,6 +12,8 @@ const api = axios.create({
 export const signupUser = async (email, password) => {
     try {
         const response = await api.post("/signup", { email, password });
+        console.log("response successful");
+
         return response.data;
     } catch (error) {
         throw new Error(error.response?.data?.error || "Signup failed");

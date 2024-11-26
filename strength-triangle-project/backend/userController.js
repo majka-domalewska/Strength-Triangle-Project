@@ -1,4 +1,4 @@
-const { client, isConnected } = require("./db");
+const { client, isConnected } = require("./db.js");
 const bcrypt = require("bcrypt");
 
 async function signupUser(email, password) {
