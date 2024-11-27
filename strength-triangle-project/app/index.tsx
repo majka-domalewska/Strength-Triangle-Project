@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native";
 import LanguageSelector from "@/components/languageSelector";
 import { useTranslation } from 'react-i18next';
 import '../backend/i18n.js';
+import DisplayAnswers from "@/components/abChoiceScreen";
 
 const HomePage: React.FC = () => {
   const { t } = useTranslation();
@@ -12,8 +13,9 @@ const HomePage: React.FC = () => {
     <PaperProvider>
       <View style={styles.view}>
         <LanguageSelector />
-        <Text>{t('welcome_message')}</Text>
-        <Text>{t('description')}</Text>
+        <DisplayAnswers />
+        {/* <Text>{t('welcome_message')}</Text>
+        <Text>{t('description')}</Text> */}
       </View>
     </PaperProvider>
   );

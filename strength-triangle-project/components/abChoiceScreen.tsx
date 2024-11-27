@@ -9,8 +9,17 @@ const DisplayAnswers = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const { answersEn, answersNl } = await getAnswers();
-            setData(answersEn);
+            const { answersEn } = await getAnswers();
+            if (Array.isArray(answersEn) && answersEn.length > 0) {
+                setData(answersEn);
+                console.log(`Fetched data: ${answersEn}`);
+            } else {
+                console.warn("No data found or malformed response");
+                setData([]);
+            }
+        } catch (error) {
+            console.error(`Error fetching data: ${error}`);
+            setData([]);
         }
         fetchData();
     }, []);
@@ -21,28 +30,40 @@ const DisplayAnswers = () => {
 
     return (
         <View style={styles.container}>
-        {data.map((item, index) => (
-            <View key={index} style={styles.itemContainer}>
-                <Text style={styles.name}>{item.name}</Text>
-                
-                {/* Display A and B sections */}
-                <View style={styles.choiceContainer}>
-                    <Text style={styles.title}>{item.A.title}</Text>
-                    <Text style={styles.explanation}>{item.A.explanation}</Text>
-                </View>
-                <View style={styles.choiceContainer}>
-                    <Text style={styles.title}>{item.B.title}</Text>
-                    <Text style={styles.explanation}>{item.B.explanation}</Text>
-                </View>
-
-                {/* Optionally display nextId values */}
-                <Text style={styles.nextId}>Next ID A: {item.nextId.A}</Text>
-                <Text style={styles.nextId}>Next ID B: {item.nextId.B}</Text>
-            </View>
-        ))}
-    </View>
-    )
-}
+            {data && data.length > 0 ? (
+                data.map((item, index) => (
+                    <View key={index} style={styles.itemContainer}>
+                        <Text style={styles.name}>{item.name || "Unnamed"}</Text>
+                        
+                        {/* Display A and B sections with safety checks */}
+                        <View style={styles.choiceContainer}>
+                            <Text style={styles.title}>
+                                {item.A?.title || "No title for A"}
+                            </Text>
+                            <Text style={styles.explanation}>
+                                {item.A?.explanation || "No explanation for A"}
+                            </Text>
+                        </View>
+                        <View style={styles.choiceContainer}>
+                            <Text style={styles.title}>
+                                {item.B?.title || "No title for B"}
+                            </Text>
+                            <Text style={styles.explanation}>
+                                {item.B?.explanation || "No explanation for B"}
+                            </Text>
+                        </View>
+    
+                        {/* Optionally display nextId values */}
+                        <Text style={styles.nextId}>Next ID A: {item.nextId?.A || "N/A"}</Text>
+                        <Text style={styles.nextId}>Next ID B: {item.nextId?.B || "N/A"}</Text>
+                    </View>
+                ))
+            ) : (
+                <Text>No data available</Text>
+            )}
+        </View>
+    );
+    
 
 const styles = StyleSheet.create({
     container: {
